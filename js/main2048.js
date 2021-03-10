@@ -1,10 +1,9 @@
 //游戏数据
 var board = new Array()
 var score = 0
-
 $('#newgamebtn').click(function () {
   newgame()
-  })
+})
 
 window.onload = function () {
   newgame()
@@ -17,7 +16,6 @@ function newgame() {
   generateOneNumber()
   generateOneNumber()
 }
-
 //初始化棋盘格函数
 function init() {
   //生成棋盘
@@ -94,31 +92,31 @@ function generateOneNumber() {
 }
 
 //绑定键盘事件
-document.onkeydown = function(event) {
+document.onkeydown = function (event) {
   switch (event.keyCode) {
-    case 37://left
-      if(moveLeft()){
+    case 37: //left
+      if (moveLeft()) {
         generateOneNumber()
         isgameover()
       }
       break;
-    case 38://up
+    case 38: //up
       if (moveUp()) {
         generateOneNumber()
         isgameover()
       }
       break;
-    case 39://right
-    if (moveRight()) {
-      generateOneNumber()
-      isgameover()
-    }
+    case 39: //right
+      if (moveRight()) {
+        generateOneNumber()
+        isgameover()
+      }
       break;
-    case 40://down
-    if (moveDown()) {
-      generateOneNumber()
-      isgameover()
-    }
+    case 40: //down
+      if (moveDown()) {
+        generateOneNumber()
+        isgameover()
+      }
       break;
     default:
       break;
@@ -133,26 +131,26 @@ function moveLeft() {
     return false
   }
   //moveLeft
-  for(var i=0;i<4;i++){
-    for(var j=1;j<4;j++){
-      if (board[i][j]!=0) {
-        for(var k=0;k<j;k++){
+  for (var i = 0; i < 4; i++) {
+    for (var j = 1; j < 4; j++) {
+      if (board[i][j] != 0) {
+        for (var k = 0; k < j; k++) {
           //对每个数字的左侧位置进行判断 判断条件 ： 落脚位置是否为空 && 落脚位置是否与带判定位置数值相等 && 数值之间是否有障碍物
-          if (board[i][k]==0 && noBlockHorizontal(i,k,j,board)) {//i,k位置为空并且i.j与i，k之间没有障碍物
+          if (board[i][k] == 0 && noBlockHorizontal(i, k, j, board)) { //i,k位置为空并且i.j与i，k之间没有障碍物
             //move
-            showMoveAnimation(i,j,i,k)
-            board[i][k]=board[i][j]
-            board[i][j]=0
+            showMoveAnimation(i, j, i, k)
+            board[i][k] = board[i][j]
+            board[i][j] = 0
             continue
-          }else
-            if (board[i][j]===board[i][k] &&  noBlockHorizontal(i,k,j,board)) {
+          } else
+          if (board[i][j] === board[i][k] && noBlockHorizontal(i, k, j, board)) {
             //move
-            showMoveAnimation(i,j,i,k)
+            showMoveAnimation(i, j, i, k)
             //两数相加
-            board[i][k]+=board[i][j]
-            board[i][j]=0
+            board[i][k] += board[i][j]
+            board[i][j] = 0
 
-            score+=board[i][k]
+            score += board[i][k]
             updateScore(score)
             continue
           }
@@ -162,7 +160,7 @@ function moveLeft() {
   }
   updateBoardView()
   return true
-  }
+}
 
 //定义向上移动的函数
 function moveUp() {
@@ -172,25 +170,25 @@ function moveUp() {
     return false
   }
   //moveUp
-  for(var j=0;j<4;j++){
-    for(var i=1;i<4;i++){
-      if (board[i][j]!=0) {
-        for(var k=0;k<i;k++){
+  for (var j = 0; j < 4; j++) {
+    for (var i = 1; i < 4; i++) {
+      if (board[i][j] != 0) {
+        for (var k = 0; k < i; k++) {
           //对每个数字的左侧位置进行判断 判断条件 ： 落脚位置是否为空 && 落脚位置是否与带判定位置数值相等 && 数值之间是否有障碍物
-          if (board[k][j]==0 && noBlockVertical(j,k,i,board)) {//i,k位置为空并且i.j与i，k之间没有障碍物
+          if (board[k][j] == 0 && noBlockVertical(j, k, i, board)) { //i,k位置为空并且i.j与i，k之间没有障碍物
             //move
-            showMoveAnimation(i,j,k,j)
-            board[k][j]=board[i][j]
-            board[i][j]=0
+            showMoveAnimation(i, j, k, j)
+            board[k][j] = board[i][j]
+            board[i][j] = 0
             continue
-          }else if (board[i][j]===board[k][j] &&  noBlockVertical(j,k,i,board)) {
+          } else if (board[i][j] === board[k][j] && noBlockVertical(j, k, i, board)) {
             //move
-            showMoveAnimation(i,j,k,j)
+            showMoveAnimation(i, j, k, j)
             //两数相加
-            board[k][j]+=board[i][j]
-            board[i][j]=0
+            board[k][j] += board[i][j]
+            board[i][j] = 0
 
-            score+=board[k][j]
+            score += board[k][j]
             updateScore(score)
             continue
           }
@@ -200,7 +198,7 @@ function moveUp() {
   }
   setTimeout(updateBoardView(), 200);
   return true
-  }
+}
 
 //定义向右移动的函数
 function moveRight() {
@@ -210,26 +208,26 @@ function moveRight() {
     return false
   }
   //moveRight
-  for(var i=0;i<4;i++){
-    for(var j=2;j>=0;j--){
-      if (board[i][j]!=0) {
-        for(var k=3;k>j;k--){
+  for (var i = 0; i < 4; i++) {
+    for (var j = 2; j >= 0; j--) {
+      if (board[i][j] != 0) {
+        for (var k = 3; k > j; k--) {
           //对每个数字的右侧位置进行判断 判断条件 ： 落脚位置是否为空 && 落脚位置是否与带判定位置数值相等 && 数值之间是否有障碍物
-          if (board[i][k]==0 && noBlockHorizontal(i,j,k,board)) {//i,k位置为空并且i.j与i，k之间没有障碍物
+          if (board[i][k] == 0 && noBlockHorizontal(i, j, k, board)) { //i,k位置为空并且i.j与i，k之间没有障碍物
             //move
-            showMoveAnimation(i,j,i,k)
-            board[i][k]=board[i][j]
-            board[i][j]=0
+            showMoveAnimation(i, j, i, k)
+            board[i][k] = board[i][j]
+            board[i][j] = 0
             continue
-          }else if (board[i][k]===board[i][j] &&  noBlockVertical(j,k,i,board)) {
+          } else if (board[i][k] === board[i][j] && noBlockVertical(j, k, i, board)) {
             //move
-            showMoveAnimation(i,j,i,k)
+            showMoveAnimation(i, j, i, k)
             //两数相加
-            board[i][k]+=board[i][j]
-            board[i][j]=0
+            board[i][k] += board[i][j]
+            board[i][j] = 0
 
             //更新分数
-            score+=board[i][k]
+            score += board[i][k]
             updateScore(score)
             continue
           }
@@ -239,7 +237,7 @@ function moveRight() {
   }
   setTimeout(updateBoardView(), 200);
   return true
-  }
+}
 
 //定义向下移动的函数
 function moveDown() {
@@ -249,25 +247,25 @@ function moveDown() {
     return false
   }
   //moveDown
-  for(var j=0;j<4;j++){
-    for(var i=2;i>=0;i--){
-      if (board[i][j]!=0) {
-        for(var k=3;k>i;k--){
+  for (var j = 0; j < 4; j++) {
+    for (var i = 2; i >= 0; i--) {
+      if (board[i][j] != 0) {
+        for (var k = 3; k > i; k--) {
           //对每个数字的下侧位置进行判断 判断条件 ： 落脚位置是否为空 && 落脚位置是否与带判定位置数值相等 && 数值之间是否有障碍物
-          if (board[k][j]==0 && noBlockVertical(j,i,k,board)) {//k,j位置为空并且i.j与k，j之间没有障碍物
+          if (board[k][j] == 0 && noBlockVertical(j, i, k, board)) { //k,j位置为空并且i.j与k，j之间没有障碍物
             //move
-            showMoveAnimation(i,j,k,j)
-            board[k][j]=board[i][j]
-            board[i][j]=0
+            showMoveAnimation(i, j, k, j)
+            board[k][j] = board[i][j]
+            board[i][j] = 0
             continue
-          }else if (board[i][j]===board[k][j] &&  noBlockVertical(j,i,k,board)) {
+          } else if (board[i][j] === board[k][j] && noBlockVertical(j, i, k, board)) {
             //move
-            showMoveAnimation(i,j,k,j)
+            showMoveAnimation(i, j, k, j)
             //两数相加
-            board[k][j]+=board[i][j]
-            board[i][j]=0
+            board[k][j] += board[i][j]
+            board[i][j] = 0
 
-            score+=board[k][j]
+            score += board[k][j]
             updateScore(score)
             continue
           }
@@ -277,9 +275,9 @@ function moveDown() {
   }
   setTimeout(updateBoardView(), 200);
   return true
-  }
+}
 
-function isgameover(){
+function isgameover() {
   if (nospace(board) && nomove(board)) {
     gameover()
   }
@@ -287,4 +285,4 @@ function isgameover(){
 
 function gameover() {
   alert('game over')
-  }
+}
