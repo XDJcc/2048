@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <title>2048</title>
-    <link rel="stylesheet" href="css/2048.css">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0">
+    <title>2048小游戏</title>
+    <link rel="stylesheet" href="css/index.css">
+
 <body>
     <header>
         <h1>2048</h1>
-        <!-- <a href="javascript:newgame();" id="newgamebtn">开始游戏</a> -->
         <button id="newgamebtn">开始新游戏</button>
-        <p>score:<span id="score">0</span></p>
+        <p>score:<span id="score"></span></p>
     </header>
 
     <div id="grid-container">
@@ -34,10 +35,19 @@
         <div class="grid-cell" id="grid-cell-3-2"></div>
         <div class="grid-cell" id="grid-cell-3-3"></div>
     </div>
-
+    <div id="play">
+        <button class="left">←</button>
+        <button class="top">↑</button>
+        <button class="bottom">↓</button>
+        <button class="right">→</button>
+    </div>
+    <footer>
+        <h3>作者：大脚</h3>
+    </footer>
     <script src="css/jquery.js"></script>
-    <script src="js/support2048.js"></script>
-    <script src="js/animation2048.js"></script>
-    <script src="js/main2048.js"></script>
+    <script src="js/support.js"></script>
+    <script src="js/animation.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>

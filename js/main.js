@@ -10,6 +10,8 @@ window.onload = function () {
 }
 
 function newgame() {
+  // 初始成绩：
+  updateScore(0)
   //初始化棋盘格
   init()
   //在随机两个格子生成数字
@@ -22,19 +24,18 @@ function init() {
   for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
       var gridcell = $("#grid-cell-" + i + "-" + j)
-      // console.log(gridcell)
+      // 定义每一个小方块的坐标值
       gridcell.css('top', getPosTop(i, j))
       gridcell.css('left', getPosLeft(i, j))
     }
   }
-  //初始化游戏数据
+  // 初始化游戏数据  生成 board 数组对游戏数据进行存储 /现为空数组
   for (var i = 0; i < 4; i++) {
-    board[i] = new Array()
+    board[i] = []
     for (var j = 0; j < 4; j++) {
       board[i][j] = 0
     }
   }
-  // console.log(board)
   updateBoardView()
 }
 
@@ -91,6 +92,39 @@ function generateOneNumber() {
   return true
 }
 
+// 绑定按钮事件 游戏
+$("#play button").click(function (e) {
+  var elemClass = $(e.target).attr('class');
+  switch (elemClass) {
+    case 'left': 
+      if (moveLeft()) {
+        generateOneNumber()
+        isgameover()
+      }
+      break;
+    case 'top':
+      if (moveUp()) {
+        generateOneNumber()
+        isgameover()
+      }
+      break;
+    case 'right': 
+      if (moveRight()) {
+        generateOneNumber()
+        isgameover()
+      }
+      break;
+    case 'bottom': 
+      if (moveDown()) {
+        generateOneNumber()
+        isgameover()
+      }
+      break;
+    default:
+      break;
+  }
+});
+
 //绑定键盘事件
 document.onkeydown = function (event) {
   switch (event.keyCode) {
@@ -125,7 +159,6 @@ document.onkeydown = function (event) {
 
 //定义向左移动的函数
 function moveLeft() {
-
   //如果不能向左移动，则返回false
   if (!canMoveLeft(board)) {
     return false
@@ -164,7 +197,6 @@ function moveLeft() {
 
 //定义向上移动的函数
 function moveUp() {
-
   //如果不能向左移动，则返回false
   if (!canMoveUp(board)) {
     return false
@@ -202,7 +234,6 @@ function moveUp() {
 
 //定义向右移动的函数
 function moveRight() {
-
   //如果不能向左移动，则返回false
   if (!canMoveRight(board)) {
     return false
@@ -241,7 +272,6 @@ function moveRight() {
 
 //定义向下移动的函数
 function moveDown() {
-
   //如果不能向左移动，则返回false
   if (!canMoveDown(board)) {
     return false
@@ -277,6 +307,7 @@ function moveDown() {
   return true
 }
 
+// 判断游戏结束
 function isgameover() {
   if (nospace(board) && nomove(board)) {
     gameover()
@@ -284,5 +315,6 @@ function isgameover() {
 }
 
 function gameover() {
+  // 提示游戏结合素
   alert('game over')
 }

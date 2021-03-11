@@ -1,14 +1,13 @@
 /* 工具函数模块 */
-
+// 得到每个格子的Top值
 function getPosTop(i, j) {
     return 20 + i * 120
 }
 
 //得到每个格子的Left值
 function getPosLeft(i, j) {
-    return 20 + j * 120
+    return 20 + j * 120 
 }
-
 //得到每个数字的背景色
 function getNumberBackgroundColor(number) {
     switch (number) {
@@ -68,39 +67,38 @@ function getNumberColor(number) {
 function getTextByNumber(number) {
     switch (number) {
         case 2:
-            return '小白';
+            return '2';
             break;
         case 4:
-            return '实习生';
+            return '4';
             break;
         case 8:
-            return '程序猿';
+            return '8';
             break;
         case 16:
-            return '项目经理';
+            return '16';
             break;
         case 32:
-            return '架构师';
+            return '32';
             break;
         case 64:
-            return '技术经理';
+            return '64';
             break;
         case 128:
-            return '高级经理';
+            return '128';
             break;
         case 256:
-            return '技术总裁';
+            return '256';
             break;
         case 512:
-            return '副总裁';
+            return '512';
             break;
         case 1024:
-            return 'CTO';
+            return '1024';
             break;
         case 2048:
-            return '总裁';
+            return '2048';
     }
-
     return ''
 }
 
